@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: voice-agent
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn voice_agent:app --host 0.0.0.0 --port 10000
+    envVars:
+      - key: GOOGLE_APPLICATION_CREDENTIALS
+        value: /etc/secrets/tts-credentials.json
+    secretFiles:
+      - path: /etc/secrets/tts-credentials.json
+        contents: <your-service-account-json>
